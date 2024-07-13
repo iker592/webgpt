@@ -174,8 +174,10 @@
       const $container = $('main')
       const $button = $('button')
       const $info = $('small')
+      const $loading = $('.loading')
 
       let messages = []
+      let end = false
 
       const SELECTED_MODEL = 'gemma-2b-it-q4f16_1-MLC'
       const engine = await CreateWebWorkerMLCEngine(
@@ -184,9 +186,13 @@
           initProgressCallback: (info) => {
             $info.textContent = info.text
             console.log(info)
-            if(info.progress === 1 ) {
+            if (info.progress === 1 && !end) {
+              end = true
+              $loading?.parentNode?.removeChild($loading)
               $button.removeAttribute('disabled')
-            }
+              addMessage("Hi! What can I help you with?", 'bot')
+              $input.focus()
+          }
           }
         }
       )
@@ -281,11 +287,16 @@
           <p>Esta es una resupuesta larga 
             y queremos ver que funciona bien</p>
         </li> -->
+        <li class="loading">
+          <i></i>
+          <h4>Loading...</h4>
+          <h5>This can take some time. Patience.</h5>
+        </li>
       </ul>
   </main>
   <form>
-    <input placeholder="Escribe tu mensaje aquí...">
-    <button disabled>Enviar</button>
+    <input placeholder="Write your question here...">
+    <button disabled>Send</button>
   </form>
 
     <!-- Para cargar el modelo -->
