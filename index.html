@@ -185,8 +185,6 @@
           $button.removeAttribute('disabled')
         }, 2000)
 
-
-
         function addMessage(text, sender){
           const clonedTemplate = $template.content.cloneNode(true)
           const $newMessage = clonedTemplate.querySelector('.message')
@@ -200,9 +198,6 @@
           $messages.appendChild($newMessage)
           $container.scrollTop = $container.scrollHeight
         }
-
-
-
       })
     </script>
 </head>
