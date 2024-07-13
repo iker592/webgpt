@@ -179,7 +179,7 @@
       let messages = []
       let end = false
 
-      const SELECTED_MODEL = 'gemma-2b-it-q4f16_1-MLC'
+      const SELECTED_MODEL = 'Llama-3-8B-Instruct-q4f16_1-MLC-1k'
       const engine = await CreateWebWorkerMLCEngine(
         new Worker('./worker.js', { type: 'module' }),
         SELECTED_MODEL, {
@@ -199,7 +199,7 @@
 
       $form.addEventListener('submit', async (event) => {
         event.preventDefault()
-        const messageText = $input.value.trim()
+        const messageText = $input.value.trim() + " give me a short answer"
         if(messageText !== '')  {
           $input.value=''
         }
